@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import withRouter from '../../utils/withRouter';
 import { compose } from 'redux';
 
