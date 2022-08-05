@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import withRouter from '../../utils/withRouter';
-import { compose } from 'redux';
+import { useSelector } from 'react-redux';
 
 import CollectionItem from '../../components/collection-item/collection-item.component';
 
@@ -12,8 +10,13 @@ import {
   CollectionTitle,
   CollectionItemsContainer,
 } from './collection.styles';
+import { useParams } from 'react-router-dom';
 
-const CollectionPage = ({ collection }) => {
+const CollectionPage = () => {
+  const { collectionId } = useParams();
+  const collection = useSelector((state) =>
+    selectCollection(collectionId)(state)
+  );
   const { title, items } = collection;
   return (
     <CollectionPageContainer>
@@ -26,8 +29,5 @@ const CollectionPage = ({ collection }) => {
     </CollectionPageContainer>
   );
 };
-const mapStateToProps = (state, ownProps) => ({
-  collection: selectCollection(ownProps.params.collectionId)(state),
-});
 
-export default compose(withRouter, connect(mapStateToProps))(CollectionPage);
+export default CollectionPage;
