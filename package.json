@@ -1,6 +1,7 @@
 {
-  "name": "crwn-clothing-server",
+  "name": "crown-clothing-server",
   "version": "1.0.0",
+  "description": "a really cool app",
   "engines": {
     "node": "16.16.0",
     "npm": "8.15.1"
