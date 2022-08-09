@@ -10,7 +10,7 @@ import { checkUserSession } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { createStructuredSelector } from 'reselect';
 
-import './App.css';
+import { GlobalStyle } from './glogal.styles';
 import { useDispatch, useSelector } from 'react-redux';
 
 const App = () => {
@@ -26,6 +26,7 @@ const App = () => {
 
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
