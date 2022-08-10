@@ -9,6 +9,7 @@ import { createStructuredSelector } from 'reselect';
 
 import { GlobalStyle } from './glogal.styles';
 import { useDispatch, useSelector } from 'react-redux';
+import ErrorBoundary from './components/error-boundary/error-boundary.component';
 
 const HomePage = lazy(() => import('./pages/homepage/homepage.component'));
 const ShopPage = lazy(() => import('./pages/shop/shop.component'));
@@ -32,23 +33,25 @@ const App = () => {
     <div>
       <GlobalStyle />
       <Header />
-      <Suspense fallback={<Spinner />}>
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/shop/*' element={<ShopPage />} />
-          <Route path='/checkout' element={<CheckoutPage />} />
-          <Route
-            path='/signin'
-            element={
-              currentUser ? (
-                <Navigate to='/' replace />
-              ) : (
-                <SignInAndSignUpPage />
-              )
-            }
-          />
-        </Routes>
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense fallback={<Spinner />}>
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/shop/*' element={<ShopPage />} />
+            <Route path='/checkout' element={<CheckoutPage />} />
+            <Route
+              path='/signin'
+              element={
+                currentUser ? (
+                  <Navigate to='/' replace />
+                ) : (
+                  <SignInAndSignUpPage />
+                )
+              }
+            />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 };
